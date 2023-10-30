@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using ToDoList.API.Utils;
 using ToDoList.API.Views.Models;
 
 namespace ToDoList.API.Data;
 
 public partial class TodolistdcaContext : DbContext
 {
-    public TodolistdcaContext()
-    {
-    }
+
+ 
 
     public TodolistdcaContext(DbContextOptions<TodolistdcaContext> options)
         : base(options)
