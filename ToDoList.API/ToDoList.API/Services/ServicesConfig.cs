@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToDoList.API.Data;
+using ToDoList.API.Services.Interfaces;
 using ToDoList.API.Utils;
 
 namespace ToDoList.API.Services
@@ -14,6 +15,8 @@ namespace ToDoList.API.Services
             {
                 options.UseSqlServer(ConnectionString.getConnection());
             });
+
+            services.AddScoped<IAuthService,AuthService>();
         }
     }
 }

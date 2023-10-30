@@ -1,26 +1,49 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ToDoList.API.Domain.DTOs;
+using ToDoList.API.Services.Interfaces;
 using ToDoList.API.Views.DTOs;
 using ToDoList.API.Views.Models;
 
 namespace ToDoList.API.Controllers
 {
-        [ApiController]
-        [Route("auth")]
+    [ApiController]
+    [Route("auth")]
     public class AuthController : Controller
     {
+        private readonly IAuthService _authService;
 
-        [HttpGet("login")]
+        public AuthController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO login)
         {
-            return Ok(login);
+            var result = await _authService.LoginAsync(login);
+
+            if (result != null)
+            {
+                return Ok("Autentificare reusita"); // Autentificare reușită
+            }
+
+            return Unauthorized("Autentificare eșuată"); // Autentificare eșuată
         }
 
-        [HttpPost("register")]
+    [HttpPost("register")]
 
-        public async Task<IActionResult> Register(User register)
+    public async Task<IActionResult> Register(RegisterDTO register)
+    {
+        if (ModelState.IsValid)
         {
-            return Ok(register);
+            var userId = await _authService.RegisterAsync(register);
+            return Ok($"User registered with ID: {userId}");
         }
-      
+
+        return BadRequest(ModelState);
     }
+
+    }
+      
 }
+

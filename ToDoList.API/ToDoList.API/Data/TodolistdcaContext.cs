@@ -118,7 +118,7 @@ public partial class TodolistdcaContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Pass)
-                .HasMaxLength(18)
+                .HasMaxLength(200)
                 .IsUnicode(false);
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
