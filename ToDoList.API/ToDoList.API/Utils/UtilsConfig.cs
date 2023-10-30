@@ -5,7 +5,6 @@ namespace ToDoList.API.Utils
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IConnectionString, ConnectionString>();
         }
     }
 }

@@ -20,10 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Repositories\Interfaces\" />
-    <Folder Include="Services\Interfaces\" />
-    <Folder Include="Views\Models\" />
-    <Folder Include="Views\DTOs\" />
   </ItemGroup>
 
 </Project>
