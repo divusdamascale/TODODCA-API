@@ -7,13 +7,14 @@ namespace ToDoList.API.Services
 {
     public class ServicesConfig
     {
+        
 
-        public static void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services,SettingsOptions option)
         {
 
             services.AddDbContext<TodolistdcaContext>(options =>
             {
-                options.UseSqlServer(ConnectionString.getConnection());
+                options.UseSqlServer(option.connectionstrings.toDoListConnection);
             });
 
             services.AddScoped<IAuthService,AuthService>();

@@ -5,17 +5,20 @@ using ToDoList.API.Services.Interfaces;
 using ToDoList.API.Views.DTOs;
 using ToDoList.API.Views.Models;
 using Microsoft.AspNetCore.Mvc;
-
+using ToDoList.API.Utils;
+using ToDoList.API.Utils.Interfaces;
 
 namespace ToDoList.API.Services
 {
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IJWTUtils _jwt;
 
-        public AuthService(IUserRepository userRepository)
+        public AuthService(IUserRepository userRepository,IJWTUtils jwt)
         {
             _userRepository = userRepository;
+            _jwt = jwt;
         }
         public async Task<string> LoginAsync(LoginDTO login)
         {
@@ -28,11 +31,10 @@ namespace ToDoList.API.Services
 
             if (BCrypt.Net.BCrypt.Verify(login.Password, user.Pass))
             {
-                //jwt
-                return "Autentificare reușită";
+                return $"{{ \"token\": \"{_jwt.CreateToken(user)}\" }}";
             }
 
-            return null;
+            return "Parola gresita";
         }
 
         public async Task<ActionResult<int>> RegisterAsync(RegisterDTO register)

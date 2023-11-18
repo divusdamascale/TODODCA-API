@@ -24,7 +24,7 @@ namespace ToDoList.API.Controllers
 
             if (result != null)
             {
-                return Ok("Autentificare reusita"); // Autentificare reușită
+                return Ok(result); // Autentificare reușită
             }
 
             return Unauthorized("Autentificare eșuată"); // Autentificare eșuată
