@@ -36,8 +36,8 @@ namespace ToDoList.API.Controllers
     {
         if (ModelState.IsValid)
         {
-            var userId = await _authService.RegisterAsync(register);
-            return Ok($"User registered with ID: {userId}");
+            var userResult = await _authService.RegisterAsync(register);
+            return Ok(userResult);
         }
 
         return BadRequest(ModelState);

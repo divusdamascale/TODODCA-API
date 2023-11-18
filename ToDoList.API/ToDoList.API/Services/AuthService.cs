@@ -37,36 +37,41 @@ namespace ToDoList.API.Services
             return "Parola gresita";
         }
 
-        public async Task<ActionResult<int>> RegisterAsync(RegisterDTO register)
+        public async Task<RegisterDTO> RegisterAsync(RegisterDTO register)
         {
-
-            if (await _userRepository.ExistsByEmail(register.Email) || await _userRepository.ExistsByUsername(register.Username))
+            try
             {
+                if(await _userRepository.ExistsByEmail(register.Email) || await _userRepository.ExistsByUsername(register.Username))
+                {
 
-                throw new Exception("Username sau Email exista deja");
-            }
+                    throw new Exception("Username sau Email exista deja");
+                }
 
 
-            var user = new User
+                var user = new User
+                {
+                    Username = register.Username,
+                    Pass = BCrypt.Net.BCrypt.HashPassword(register.Password),
+                    Email = register.Email
+                };
+
+                var profile = new Profile
+                {
+                    FirstName = register.FirstName,
+                    LastName = register.LastName,
+                    BirthDate = register.BirthDate,
+                    RegisterDate = DateTime.Now
+                };
+
+                user.Profile = profile;
+                await _userRepository.AddAsync(user);
+                await _userRepository.SaveChangesAsync();
+
+                return register;
+            }catch(Exception ex)
             {
-                Username = register.Username,
-                Pass = BCrypt.Net.BCrypt.HashPassword(register.Password),
-                Email = register.Email
-            };
-
-            var profile = new Profile
-            {
-                FirstName = register.FirstName,
-                LastName = register.LastName,
-                BirthDate = register.BirthDate,
-                RegisterDate = DateTime.Now
-            };
-
-            user.Profile = profile;
-            await _userRepository.AddAsync(user);
-            await _userRepository.SaveChangesAsync();
-
-            return user.UserId;
+                throw new Exception("Eroare",ex);
+            }     
         }
     }
 }
