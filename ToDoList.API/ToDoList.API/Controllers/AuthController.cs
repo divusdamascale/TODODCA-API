@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ToDoList.API.Domain.DTOs;
+using ToDoList.API.Domain.Entity;
 using ToDoList.API.Services.Interfaces;
 using ToDoList.API.Views.DTOs;
 using ToDoList.API.Views.Models;
@@ -18,16 +19,16 @@ namespace ToDoList.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDTO login)
+        public async Task<LoggedUser> Login(LoginDTO login)
         {
             var result = await _authService.LoginAsync(login);
 
             if (result != null)
             {
-                return Ok(result); // Autentificare reușită
+                return result; // Autentificare reușită
             }
 
-            return Unauthorized("Autentificare eșuată"); // Autentificare eșuată
+            return null; // Autentificare eșuată
         }
 
     [HttpPost("register")]
