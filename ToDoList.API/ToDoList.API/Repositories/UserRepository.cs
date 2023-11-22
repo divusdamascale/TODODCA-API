@@ -32,7 +32,9 @@ namespace ToDoList.API.Repositories
 
         public async Task<User> GetUserByUsernameAsync(string username)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return await _context.Users
+                .Include(u =>u.Profile)
+                .FirstOrDefaultAsync(u => u.Username == username);
         }
 
         public async Task<int> SaveChangesAsync()

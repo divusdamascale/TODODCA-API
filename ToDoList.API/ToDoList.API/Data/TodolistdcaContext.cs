@@ -62,10 +62,10 @@ public partial class TodolistdcaContext : DbContext
             entity.Property(e => e.LastName).HasMaxLength(30);
             entity.Property(e => e.RegisterDate).HasColumnType("date");
 
-            entity.HasOne(d => d.User).WithOne(p => p.Profile)
-                .HasForeignKey<Profile>(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Profile__UserId__74AE54BC");
+            //entity.HasOne(d => d.User).WithOne(p => p.Profile)
+            //    .HasForeignKey<Profile>(d => d.UserId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK__Profile__UserId__74AE54BC");
         });
 
         modelBuilder.Entity<Tag>(entity =>

@@ -17,5 +17,5 @@ public partial class Profile
 
     public DateTime RegisterDate { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    //public virtual User User { get; set; } = null!;
 }
