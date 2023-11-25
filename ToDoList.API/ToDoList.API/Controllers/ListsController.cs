@@ -1,19 +1,28 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ToDoList.API.Domain.DTOs;
+using ToDoList.API.Services.Interfaces;
 
 namespace ToDoList.API.Controllers
 {
     [ApiController]
-    [Route("List")]
+    [Route("list")]
     public class ListsController:Controller
     {
+        private readonly IListService _service;
+
+        public ListsController(IListService service)
+        {
+            _service = service;
+        }
 
 
         [Authorize]
-        [HttpGet("getById/{id}")]
-        public string GetById([FromRoute]int id)
+        [HttpGet("getByUserId/{id}")]
+        public async Task<List<ListDTO>> GetByUserId([FromRoute]int id)
         {
-            return id.ToString();
+            var result = await _service.GetListsByUserID(id);
+            return result;
         }
 
 

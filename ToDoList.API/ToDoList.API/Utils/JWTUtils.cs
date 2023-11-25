@@ -25,9 +25,7 @@ namespace ToDoList.API.Utils
                 SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>
-            {
-                new Claim("sub", user.Username),
-                new Claim("email", user.Email),
+            { 
                 new Claim("id", user.UserId.ToString()),
 
             };

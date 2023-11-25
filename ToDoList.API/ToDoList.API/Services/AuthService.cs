@@ -4,9 +4,9 @@ using ToDoList.API.Repositories.Interfaces;
 using ToDoList.API.Services.Interfaces;
 using ToDoList.API.Views.DTOs;
 using ToDoList.API.Views.Models;
-using Microsoft.AspNetCore.Mvc;
 using ToDoList.API.Utils;
 using ToDoList.API.Utils.Interfaces;
+using NuGet.Common;
 using ToDoList.API.Domain.Entity;
 
 namespace ToDoList.API.Services
@@ -21,7 +21,7 @@ namespace ToDoList.API.Services
             _userRepository = userRepository;
             _jwt = jwt;
         }
-        public async Task<LoggedUser> LoginAsync(LoginDTO login)
+        public async Task<JwtResult> LoginAsync(LoginDTO login)
         {
             var user = await _userRepository.GetUserByUsernameAsync(login.Username);
 
@@ -33,17 +33,9 @@ namespace ToDoList.API.Services
             if(BCrypt.Net.BCrypt.Verify(login.Password, user.Pass))
             {
 
-                LoggedUser loggedUser = new LoggedUser
-                {
-                    Email = user.Email,
-                    Lists = user.Lists,
-                    Profile = user.Profile,
-                    Tags = user.Tags,
-                    Token = _jwt.CreateToken(user),
-                    UserId = user.UserId,
-                    Username = user.Username
-                };
-                return loggedUser;
+
+                var result = new JwtResult { Token = _jwt.CreateToken(user) };
+                return result;
             }
 
             return null;

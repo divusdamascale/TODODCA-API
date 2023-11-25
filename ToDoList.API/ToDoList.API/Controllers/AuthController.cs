@@ -19,7 +19,7 @@ namespace ToDoList.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<LoggedUser> Login(LoginDTO login)
+        public async Task<JwtResult> Login(LoginDTO login)
         {
             var result = await _authService.LoginAsync(login);
 

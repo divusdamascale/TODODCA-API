@@ -9,6 +9,6 @@ namespace ToDoList.API.Services.Interfaces
     public interface IAuthService
     {
         Task<RegisterDTO> RegisterAsync(RegisterDTO register);
-        Task<LoggedUser> LoginAsync(LoginDTO login);
+        Task<JwtResult> LoginAsync(LoginDTO login);
     }
 }

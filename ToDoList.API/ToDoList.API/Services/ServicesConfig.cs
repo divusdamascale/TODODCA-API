@@ -18,6 +18,7 @@ namespace ToDoList.API.Services
             });
 
             services.AddScoped<IAuthService,AuthService>();
+            services.AddScoped<IListService,ListService>();
         }
     }
 }

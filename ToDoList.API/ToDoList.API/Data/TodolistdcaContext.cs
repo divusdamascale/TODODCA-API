@@ -41,10 +41,10 @@ public partial class TodolistdcaContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.StartDate).HasColumnType("datetime");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Lists)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Lists_Users");
+            //entity.HasOne(d => d.User).WithMany(p => p.Lists)
+            //    .HasForeignKey(d => d.UserId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_Lists_Users");
         });
 
         modelBuilder.Entity<Profile>(entity =>
@@ -76,10 +76,10 @@ public partial class TodolistdcaContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.User).WithMany(p => p.Tags)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__TAGS__UserId__778AC167");
+            //entity.HasOne(d => d.User).WithMany(p => p.Tags)
+            //    .HasForeignKey(d => d.UserId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK__TAGS__UserId__778AC167");
         });
 
         modelBuilder.Entity<Views.Models.Task>(entity =>

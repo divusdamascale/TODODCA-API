@@ -17,5 +17,5 @@ public partial class List
 
     public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
 
-    public virtual User User { get; set; } = null!;
+    //public virtual User User { get; set; } = null!;
 }
