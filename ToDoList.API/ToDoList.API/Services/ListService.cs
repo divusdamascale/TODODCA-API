@@ -1,6 +1,7 @@
 ﻿using ToDoList.API.Domain.DTOs;
 using ToDoList.API.Repositories.Interfaces;
 using ToDoList.API.Services.Interfaces;
+using ToDoList.API.Views.Models;
 
 namespace ToDoList.API.Services
 {
@@ -12,6 +13,30 @@ namespace ToDoList.API.Services
         {
             _repo = repo;
         }
+
+        public async Task<List> CreateList(ListToAddDTO list)
+        {
+            var listToAdd  = new List
+            {
+                Description = list.Description,
+                ListName = list.ListName,
+                StartDate = list.StartDate,
+                UserId = list.UserId
+            };
+
+            var result = await _repo.CreateList(listToAdd);
+
+            return result;
+
+            
+        }
+
+        public async Task<List> DeleteList(int id)
+        {
+            var result = await _repo.DeleteList(id);
+            return result;
+        }
+
         public async Task<List<ListDTO>> GetListsByUserID(int userId)
         {
             var result = await _repo.getListsByUserId(userId);

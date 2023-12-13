@@ -20,5 +20,20 @@ namespace ToDoList.API.Repositories
             .Where(u => u.UserId == userId)
             .ToListAsync(); ;
         }
+
+        public async Task<List> CreateList(List list)
+        {
+            await _context.Lists.AddAsync(list);
+            await _context.SaveChangesAsync();
+            return list;
+        }
+
+        public async Task<List> DeleteList(int id)
+        {
+            var lement =await  _context.Lists.FindAsync(id);
+            _context.Lists.Remove(lement);
+            await _context.SaveChangesAsync();
+            return lement;
+        }
     }
 }

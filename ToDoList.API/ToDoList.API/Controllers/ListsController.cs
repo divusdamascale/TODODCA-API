@@ -25,6 +25,24 @@ namespace ToDoList.API.Controllers
             return result;
         }
 
+        [Authorize]
+        [HttpPost("CreateList")]
+        public async Task<IActionResult> Create([FromBody]ListToAddDTO list)
+        {
+            var result = await _service.CreateList(list);
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpDelete("DeleteList/{id}")]
+
+        public async Task<IActionResult> Delete([FromRoute]int id)
+        {
+            var result = await _service.DeleteList(id);
+            return Ok(result);
+        }
+
+
 
     }
 }
