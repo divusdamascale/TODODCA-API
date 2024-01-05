@@ -22,7 +22,7 @@ public partial class TodolistdcaContext : DbContext
 
     public virtual DbSet<Tag> Tags { get; set; }
 
-    public virtual DbSet<Views.Models.Task> Tasks { get; set; }
+    public virtual DbSet<Views.Models.Task> Tasks{ get; set; }
 
     public virtual DbSet<TaskTag> TaskTags { get; set; }
 

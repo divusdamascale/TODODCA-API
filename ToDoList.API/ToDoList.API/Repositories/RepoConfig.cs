@@ -9,6 +9,7 @@ namespace ToDoList.API.Repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>(); 
             services.AddScoped<IListRepository, ListRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
         }
     }
 }

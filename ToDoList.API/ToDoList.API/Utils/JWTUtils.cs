@@ -27,6 +27,7 @@ namespace ToDoList.API.Utils
             var claims = new List<Claim>
             { 
                 new Claim("id", user.UserId.ToString()),
+                new Claim("username", user.Username),
 
             };
 
