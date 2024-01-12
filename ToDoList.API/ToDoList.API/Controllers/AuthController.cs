@@ -19,31 +19,29 @@ namespace ToDoList.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<JwtResult> Login(LoginDTO login)
+        public async Task<IActionResult> Login(LoginDTO login)
         {
             var result = await _authService.LoginAsync(login);
 
-            if (result != null)
+            if(result != null)
             {
-                return result; // Autentificare reușită
+                return Ok(result); // Autentificare reușită
             }
 
-            return null; // Autentificare eșuată
+            return Unauthorized(); // Autentificare eșuată
         }
 
-    [HttpPost("register")]
-
-    public async Task<IActionResult> Register(RegisterDTO register)
-    {
-        if (ModelState.IsValid)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(RegisterDTO register)
         {
-            var userResult = await _authService.RegisterAsync(register);
-            return Ok(userResult);
+            if(ModelState.IsValid)
+            {
+                var userResult = await _authService.RegisterAsync(register);
+                return Ok(userResult);
+            }
+
+            return BadRequest(ModelState);
         }
-
-        return BadRequest(ModelState);
-    }
-
     }
       
 }

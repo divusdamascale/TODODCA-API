@@ -23,22 +23,23 @@ namespace ToDoList.API.Services
         }
         public async Task<JwtResult> LoginAsync(LoginDTO login)
         {
+           
+
             var user = await _userRepository.GetUserByUsernameAsync(login.Username);
 
-            if (user == null)
+            if(user == null)
             {
                 throw new Exception("Userul nu exista");
             }
 
-            if(BCrypt.Net.BCrypt.Verify(login.Password, user.Pass))
+            if(BCrypt.Net.BCrypt.Verify(login.Password,user.Pass))
             {
-
-
-                var result = new JwtResult { Token = _jwt.CreateToken(user) };
-                return result;
+                return new JwtResult { Token = _jwt.CreateToken(user) };
             }
 
             return null;
+
+           
         }
 
         public async Task<RegisterDTO> RegisterAsync(RegisterDTO register)

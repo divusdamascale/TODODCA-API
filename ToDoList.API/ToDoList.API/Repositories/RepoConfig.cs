@@ -11,6 +11,7 @@ namespace ToDoList.API.Repositories
             services.AddScoped<IListRepository, ListRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<ITaskTagRepository, TaskTagRepository>();
         }
     }
 }
