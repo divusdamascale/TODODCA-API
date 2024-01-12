@@ -22,9 +22,9 @@ namespace ToDoList.API.Repositories
             var addedTask = await _context.Tasks.AddAsync(task);
             await _context.SaveChangesAsync();
 
-            if(addedTask.Entity != null)
+            if(addedTask.Entity is not null)
             {
-                return task;
+                return addedTask.Entity;
             }
             else
             {

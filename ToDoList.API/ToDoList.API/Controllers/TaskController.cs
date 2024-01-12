@@ -60,16 +60,18 @@ namespace ToDoList.API.Controllers
 
         [Authorize]
         [HttpPost("CreateTask")]
-        public async Task<IActionResult> CreateTask([FromBody] TaskToAddDTO task)
+        public async Task<Views.Models.Task> CreateTask([FromBody] TaskToAddDTO task)
         {
-            var list = await _service.CreateTask(task);
-
-            if(list != null)
+            try
             {
-                return Ok(list);
+                var taskAdded = await _service.CreateTask(task);
+                if(taskAdded.TaskName is null) throw new Exception("The task could not been created");
+                return taskAdded;
             }
-
-            return BadRequest();
+            catch(Exception)
+            {
+                return null;
+            }
         }
 
         [Authorize]

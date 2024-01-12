@@ -30,18 +30,18 @@ namespace ToDoList.API.Services
 
         }
 
-        public async Task<TaskToAddDTO> CreateTask(TaskToAddDTO task)
+        public async Task<Views.Models.Task> CreateTask(TaskToAddDTO task)
         {
             var taskToAdd = TaskToAddDTOToTask(task);
             var addedTask = await _repository.CreateTask(taskToAdd);
 
             if(addedTask is not null)
             {
-                return task;
+                return addedTask;
             }
             else
             {
-                return new TaskToAddDTO();
+                return new Views.Models.Task();
             }
         }
 

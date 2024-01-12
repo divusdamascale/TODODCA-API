@@ -10,7 +10,7 @@ namespace ToDoList.API.Services.Interfaces
 
         Task<IEnumerable<Views.Models.Task>> GetTasksByListId(int listId);
 
-        Task<TaskToAddDTO> CreateTask(TaskToAddDTO task);
+        Task<Views.Models.Task> CreateTask(TaskToAddDTO task);
 
         Task<TaskToUpdateDTO> UpdateTask(TaskToUpdateDTO task);
 
